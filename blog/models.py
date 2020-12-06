@@ -1,7 +1,13 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 
+
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self).get_queryset()\
+                                            .filter(status='publicado')
 
 class Post(models.Model):
     STATUS = (
@@ -35,6 +41,12 @@ class Post(models.Model):
         choices=STATUS,
         default='rascunho'
     )
+    
+    objects = models.Manager()
+    published = PublishedManager()
+
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[self.pk, self.slug])
 
     class Meta:
         ordering = ('publicado',)
