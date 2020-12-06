@@ -46,7 +46,7 @@ class Post(models.Model):
     published = PublishedManager()
 
     def get_absolute_url(self):
-        return reverse('post_detail', args=[self.pk, self.slug])
+        return reverse('post_detail', args=[self.slug, self.pk])
 
     class Meta:
         ordering = ('publicado',)

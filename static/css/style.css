@@ -5,6 +5,8 @@ a {
 body{
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
 }
 
 header {
@@ -22,7 +24,6 @@ header h1 a {
 
 .nav-right {
     display: flex;
-    padding-top: 2rem;
 }
 
 .post-entry {

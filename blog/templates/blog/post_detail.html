@@ -6,6 +6,10 @@
     <div class="post-entry">
         <h2>{{ custom.titulo }}</h2>
         <p>{{ custom.conteudo }}</p>
+        <p>{{ custom.status }}</p>
+        <p>{{ custom.publicado }}</p>
     </div>
+
+    <a href="{% url 'post_edit' custom.slug custom.pk %}">+ Editar Postagem do Blog</a>
 
 {% endblock content %}
