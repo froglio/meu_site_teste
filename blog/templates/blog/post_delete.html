@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-{% block title %}Blog - Editar Postagem{% endblock title %}
+{% block title %}Blog - Deletar Postagem{% endblock title %}
 
 {% block content %}
 
-<h1>Editar Postagem</h1>
+<h1>Deletar Postagem</h1>
 
 <form action="" method="POST"> {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Editar">
+    <p>Você tem certeza que deseja deletar o registro "{{ post.titulo }}"?</p>
+    <input type="submit" value="Confirmar">
     <a href="{% url 'post_detail' object.slug object.pk %}"><input type="button" value="Cancelar"></a>
 </form>
 

@@ -10,6 +10,7 @@
         <p>{{ custom.publicado }}</p>
     </div>
 
-    <a href="{% url 'post_edit' custom.slug custom.pk %}">+ Editar Postagem do Blog</a>
+    <a style="margin-right: 10px;" href="{% url 'post_edit' custom.slug custom.pk %}">+ Editar Postagem do Blog</a>
+    <a href="{% url 'post_delete' custom.slug custom.pk %}">- Deletar Postagem do Blog</a>
 
 {% endblock content %}
