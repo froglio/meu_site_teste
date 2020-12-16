@@ -1,5 +1,65 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Blog - Detalhe{% endblock title %}
+
+{% block navigation %}
+<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">Blog do Fabian</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'sobre_home' %}">Sobre</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'contato' %}">Contato</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post_new' %}">Nova Postagem</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+            {% endif %}
+            </ul>
+        </div>
+        </div>
+    </nav>
+{% endblock navigation %}
+
+{% block header %}
+    <!-- Page Header -->
+    {% if object.imagem %}
+    <header class="masthead" style="background-image: url({{ object.imagem.url }})">
+    {% else %}
+    <header class="masthead" style="background-image: url({% static 'img/about-bg.jpg' %})">
+    {% endif %}
+        <div class="overlay"></div>
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+                <h1>{{ object.titulo }}</h1>
+                <span class="subheading">A Blog Theme by Start Bootstrap</span>
+            </div>
+            </div>
+        </div>
+        </div>
+    </header>
+{% endblock header %}
 
 {% block content %}
 
@@ -12,13 +72,18 @@
     {% endif %}
     
     <div class="post-entry">
-        <h2>{{ custom.titulo }}</h2>
-        <p>{{ custom.conteudo }}</p>
+        <p>{{ custom.conteudo|safe }}</p>
+        <br>
         <p>{{ custom.status }}</p>
+        <br>
         <p>{{ custom.publicado }}</p>
     </div>
 
-    <a style="margin-right: 10px;" href="{% url 'post_edit' custom.slug custom.pk %}">+ Editar Postagem do Blog</a>
-    <a href="{% url 'post_delete' custom.slug custom.pk %}">- Deletar Postagem do Blog</a>
+    {% if request.user.is_authenticated %}
+        <div class="container col-md-3" style="margin: 0; padding: 0;">
+            <a style="margin-bottom: 10px; width: 100%" class="btn btn-success" href="{% url 'post_edit' custom.slug custom.pk %}">Editar Postagem</a>
+            <a style="width: 100%" class="btn btn-danger" href="{% url 'post_delete' custom.slug custom.pk %}">Deletar Postagem</a>
+        </div>
+    {% endif %}
 
 {% endblock content %}

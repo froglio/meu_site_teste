@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrapform',
+    'ckeditor',
     'blog',
     'accounts',
+    'social',
+    'contato',
+    'sobre',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.processor.ctx_social',
             ],
         },
     },
@@ -139,3 +145,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     'static',
 )
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'f3f9ec2843bc09'
+EMAIL_HOST_PASSWORD = '2dcca2e1d28f35'
+EMAIL_PORT = '2525'
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

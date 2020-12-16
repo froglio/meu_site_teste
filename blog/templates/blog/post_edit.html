@@ -1,14 +1,60 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 {% block title %}Blog - Editar Postagem{% endblock title %}
+
+{% block navigation %}
+<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" style="position: relative; background-color: #7d8084; margin-bottom: 40px;">
+        <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">Blog do Fabian</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'sobre_home' %}">Sobre</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'contato' %}">Contato</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post_new' %}">Nova Postagem</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+            {% endif %}
+            </ul>
+        </div>
+        </div>
+    </nav>
+{% endblock navigation %}
 
 {% block content %}
 
-<h1>Editar Postagem</h1>
-
-<form action="" method="POST"> {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Editar">
-    <a href="{% url 'post_detail' object.slug object.pk %}"><input type="button" value="Cancelar"></a>
-</form>
+<div class="container">
+    <div class="card" style="max-width: 1000px; margin: 0 auto;">
+        <div class="card-header">
+            <h1>EDITAR POSTAGEM</h1>
+        </div>
+        <div class="card-body">
+            <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                {{ form|bootstrap }}
+                <input type="submit" class="btn btn-success" value="Editar">
+                <a href="{% url 'post_detail' object.slug object.pk %}"><input type="button" class="btn btn-danger" value="Cancelar"></a>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
