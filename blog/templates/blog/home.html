@@ -77,9 +77,10 @@
                     {{ post.conteudo|striptags|safe|truncatechars:"400" }}
                 </h3>
             </a>
-            <p class="post-meta">Posted by
-                <a href="#">Start Bootstrap</a>
-            on July 8, 2019</p>
+            <p class="post-meta">Postado por
+                <a href="#">{{ post.autor }}</a>
+                <br>
+            em {{ post.publicado }}</p>
         </div>
         <hr>
     {% endfor %}

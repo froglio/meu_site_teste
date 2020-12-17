@@ -41,6 +41,7 @@
 
 {% block content %}
 
+{% if request.user.is_authenticated and request.user == object.autor %}
 <h1>Deletar Postagem</h1>
 
 <form action="" method="POST"> {% csrf_token %}
@@ -48,5 +49,9 @@
     <input type="submit" class="btn btn-success" value="Confirmar">
     <a href="{% url 'post_detail' object.slug object.pk %}"><input type="button" class="btn btn-danger" value="Cancelar"></a>
 </form>
+
+{% else %}
+{% include 'proibido.html' %}
+{% endif %}
 
 {% endblock content %}

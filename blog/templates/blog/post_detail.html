@@ -72,14 +72,14 @@
     {% endif %}
     
     <div class="post-entry">
+        <p><b><i>Conteúdo:</i></b></p>
         <p>{{ custom.conteudo|safe }}</p>
         <br>
-        <p>{{ custom.status }}</p>
-        <br>
+        <p>{{ custom.status|capfirst }} por <b>{{ custom.autor }}</b></p>
         <p>{{ custom.publicado }}</p>
     </div>
 
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated and request.user == custom.autor %}
         <div class="container col-md-3" style="margin: 0; padding: 0;">
             <a style="margin-bottom: 10px; width: 100%" class="btn btn-success" href="{% url 'post_edit' custom.slug custom.pk %}">Editar Postagem</a>
             <a style="width: 100%" class="btn btn-danger" href="{% url 'post_delete' custom.slug custom.pk %}">Deletar Postagem</a>
